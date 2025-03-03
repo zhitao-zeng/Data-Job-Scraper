@@ -9,7 +9,7 @@ def load_job_data(keyword):
     """Scrape job listings from multiple sites."""
     jobs = scrape_jobs(
         #site_name=[ "linkedin", "zip_recruiter", "glassdoor"],
-        site_name=[ "linkedin",  "glassdoor"],
+        site_name=[ "linkedin",  "glassdoor","indeed"],
         search_term=keyword,
         location="United States",
         results_wanted=150,
@@ -27,7 +27,7 @@ def remove_duplicate_jobs(jobs):
 
 def find_removal_reasons(description, keywords):
     """Identify keywords in job descriptions."""
-    escaped_keywords = [re.escape(keyword) for keyword in keywords]
+    escaped_keywords = [re.escape(keyword) for keyword in keywords]     
     pattern = '|'.join(escaped_keywords)
     return ', '.join(re.findall(pattern, description, re.IGNORECASE))
 
@@ -76,6 +76,11 @@ def save_jobs_to_csv(jobs, filename):
         print(f"Data saved to {filename}")
     else:
         print(f"No new or different data to save for {filename}")
+        
+def add_hyperlink_column(jobs, url_column):
+    """Convert a column of URLs to hyperlinks."""
+    jobs[url_column] = jobs[url_column].apply(lambda x: f'=HYPERLINK("{x}", "Link")' if pd.notna(x) else '')
+    return jobs
 
 def main():
     # 获取今天和昨天的日期
@@ -89,7 +94,7 @@ def main():
     title_keywords = ['Director', 'Manager','Lead','Principal','AVP','Intern']
 
     # 定义需要查询的职位类型
-    job_types = [ "data scientist","data analyst","Model Risk","data engineer"]
+    job_types = [ "data scientist","data analyst","Model Risk","data engineer","Acturial"]
 
     # 初始化一个空的DataFrame来存储所有结果
     all_jobs = pd.DataFrame()
@@ -120,9 +125,11 @@ def main():
     # 删除合并后的DataFrame中的重复项
     all_jobs.drop_duplicates(subset=['title', 'company'], keep='first', inplace=True)
 
+    #if 'job_url' in all_jobs.columns:
+    #    all_jobs = add_hyperlink_column(all_jobs, 'job_url')
     # 保存到CSV文件
     today_file = f"jobs_{today}.csv"
-    all_jobs.to_csv(today_file, index=False,quotechar='"', quoting=2)
+    all_jobs.to_csv(today_file, index=False, quotechar='"', quoting=2)
 
     print(f"Found {len(all_jobs)} unique jobs across all categories.")
 
