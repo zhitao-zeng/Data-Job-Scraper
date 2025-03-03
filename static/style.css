@@ -1,0 +1,272 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.search-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
+    min-width: 200px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.message {
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.job-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.job-title {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.job-company, .job-location {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.job-description {
+    margin-top: 10px;
+    color: #333;
+}
+
+.job-url {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.job-url:hover {
+    text-decoration: underline;
+}
+
+/* 加载动画样式 */
+.loading {
+    text-align: center;
+    padding: 20px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 统计区域样式 */
+.stats-section {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sort-controls select {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 职位卡片样式优化 */
+.job-card {
+    position: relative;
+}
+
+.job-description {
+    position: relative;
+    max-height: 100px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.job-description.expanded {
+    max-height: none;
+}
+
+.description-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(transparent, white);
+    pointer-events: none;
+}
+
+.expand-btn {
+    color: #007bff;
+    background: none;
+    border: none;
+    padding: 5px 0;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.job-meta {
+    display: flex;
+    gap: 15px;
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.job-meta i {
+    margin-right: 5px;
+}
+
+/* 标签样式 */
+.job-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.tag {
+    background: #e9ecef;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    color: #495057;
+}
+
+/* 爬取数量选择器样式 */
+.results-wanted {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.results-wanted select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+/* 来源标签样式 */
+.source-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    margin-right: 10px;
+}
+
+.source-linkedin {
+    background-color: #0077b5;
+    color: white;
+}
+
+.source-glassdoor {
+    background-color: #0caa41;
+    color: white;
+}
+
+.source-indeed {
+    background-color: #003A9B;
+    color: white;
+}
+
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.job-info {
+    flex: 1;
+}
+
+.job-meta-right {
+    text-align: right;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.timestamp {
+    color: #666;
+    font-size: 0.85em;
+    margin-top: 5px;
+} 

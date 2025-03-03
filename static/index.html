@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>职位搜索器</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>职位搜索器</h1>
+        
+        <div class="search-section">
+            <input type="text" id="searchQuery" placeholder="输入职位关键词" value="data scientist">
+            <input type="text" id="excludeKeywords" placeholder="排除关键词（用逗号分隔）">
+            <input type="text" id="excludeTitles" placeholder="排除职位（用逗号分隔）">
+            <div class="results-wanted">
+                <label for="resultsWanted">爬取数量：</label>
+                <select id="resultsWanted">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150" selected>150</option>
+                    <option value="200">200</option>
+                    <option value="300">300</option>
+                </select>
+            </div>
+            <button onclick="startScrape()">开始搜索</button>
+            <button onclick="getJobs()">查看结果</button>
+        </div>
+
+        <div id="message" class="message"></div>
+        
+        <!-- 添加统计和排序区域 -->
+        <div id="statsSection" class="stats-section" style="display: none;">
+            <div class="stats-info"></div>
+            <div class="sort-controls">
+                <label>排序方式：</label>
+                <select id="sortSelect" onchange="sortJobs()">
+                    <option value="date">发布日期</option>
+                    <option value="company">公司名称</option>
+                    <option value="title">职位名称</option>
+                    <option value="location">地点</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 添加加载动画 -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>正在加载数据...</p>
+        </div>
+
+        <div id="results" class="results">
+            <div id="jobsList"></div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html> 
